@@ -28,8 +28,7 @@ Before running the project locally, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/library-management-system.git
-cd library-management-system
+git clone https://github.com/ashutoshsharma9758/library-management-system.git
 ```
 ### 1. Backend Setup
 #### Navigate to the backend directory and install dependencies:
