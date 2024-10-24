@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/book');
-
+const {protect, isAdmin} = require("../middlewares/isAuth.js");
 router.post('/', protect, isAdmin, async (req, res) => {
     try {
       const { isbn, title, author, publishedDate, category, availableCopies } = req.body;

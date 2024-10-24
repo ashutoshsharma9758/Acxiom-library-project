@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import BookList from './components/BookList.jsx';
@@ -9,17 +9,15 @@ import SignUp from "./components/SignUp.jsx"
 function App() {
   return (
     <Router>
-      <div>
-        <Switch>
-          <Route path="/" component={Login} />
-          <Route path="/register" component={SignUp} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/books" component={BookList} />
-          <Route path="/add-book" component={AddBook} />
-          <Route path="/issue-book" component={IssueBook} />
+        <Routes>
+          <Route path="/" element={<Login/>} />
+          <Route path="/register" element={<SignUp/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/books" element={<BookList/>} />
+          <Route path="/add-book" element={<AddBook/>} />
+          <Route path="/issue-book" element={<IssueBook/>} />
           {/* Add other routes as needed */}
-        </Switch>
-      </div>
+        </Routes>
     </Router>
   );
 }
