@@ -1,69 +1,41 @@
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .table th,
-  .table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  .table th {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .table tr:hover {
-    background-color: #e9ecef;
-  }
-  
-  .btn {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    margin-right: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .btn-warning {
-    background-color: #ffc107;
-    color: white;
-  }
-  
-  .btn-warning:hover {
-    background-color: #e0a800;
-    transform: translateY(-2px);
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-    transform: translateY(-2px);
-  }
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse; /* Keeps borders together */
+  margin-top: 20px; /* Spacing above the table */
+  border: 2px solid #ddd; /* Border for the table */
+  border-radius: 4px; /* Rounded corners for the table */
+  overflow: hidden; /* Ensures border rounding works */
+}
+
+.table th,
+.table td {
+  padding: 12px; /* Increased padding for better spacing */
+  text-align: left;
+  border: 1px solid #ddd; /* Border for table cells */
+  background-color: #fff; /* White background for cells */
+}
+
+.table th {
+  background-color: #007bff; /* Header background color */
+  color: white;
+  font-weight: bold; /* Ensures table headers are bold */
+}
+
+/* Add spacing between rows */
+.table tr {
+  border-bottom: 1px solid #ddd; /* Border between rows */
+}
+
+/* Add a little space around the buttons */
+.btn {
+  margin: 0 5px; /* Space around buttons */
+}
+
+/* Optional: Change hover effect for table rows */
+.table tr:hover {
+  background-color: #f1f1f1; /* Light grey background on hover */
+}

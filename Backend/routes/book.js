@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Book = require('../models/book');
 const {protect, isAdmin} = require("../middlewares/isAuth.js");
-router.post('/', protect, isAdmin, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
       const { isbn, title, author, publishedDate, category, availableCopies } = req.body;
   
@@ -22,7 +22,7 @@ router.post('/', protect, isAdmin, async (req, res) => {
     }
   });
   
-router.get('/', protect, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
       const books = await Book.find({});
       res.json(books);
@@ -31,7 +31,7 @@ router.get('/', protect, async (req, res) => {
     }
   });
   
-router.put('/:isbn', protect, isAdmin, async (req, res) => {
+router.put('/:isbn', async (req, res) => {
     try {
       const { isbn } = req.params;
       const updatedBook = await Book.findOneAndUpdate({ isbn }, req.body, { new: true });
@@ -46,7 +46,7 @@ router.put('/:isbn', protect, isAdmin, async (req, res) => {
     }
   });
   
-router.delete('/:isbn', protect, isAdmin, async (req, res) => {
+router.delete('/:isbn', async (req, res) => {
     try {
       const { isbn } = req.params;
       const deletedBook = await Book.findOneAndDelete({ isbn });

@@ -1,53 +1,86 @@
+/* Ensure the entire page has the background image */
+body, html {
+  height: 100%;
+  /* width:100%; */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: url('../assets/library.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+/* Container styling */
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  input:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  .btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
-  }
+  max-width: 400px;
+  width: 70%; /* Allows some responsiveness */
+  padding: 20px;
+  margin-top: 300px;
+  background-color: rgba(45, 49, 49, 0.85); /* Semi-transparent background */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  color: #4b4a4a; /* White text color */
+  text-align: center;
+}
+
+/* Header styling */
+h2 {
+  color: #fcfbfb;
+  margin-bottom: 20px;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Label styling */
+label {
+  /* display: block; */
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #4f4e4e;
+}
+
+/* Input styling */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #f2f2f2;
+}
+
+/* Input focus styling */
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button styling */
+.btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Link styling */
+p a {
+  color: #fcfbfb;
+  text-decoration: underline;
+}

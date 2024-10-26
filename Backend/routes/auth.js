@@ -3,6 +3,7 @@ const User= require("../models/user.js");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { protect } = require("../middlewares/isAuth.js");
 router.use(express.urlencoded({extended:true}));
 router.use(express.json());
 router.post("/signup", async (req,res)=>{
@@ -70,16 +71,16 @@ router.post("/login", async(req, res)=>{
                         secure: false, // Set to true if using HTTPS
                         sameSite: 'Lax',
                         domain: 'localhost', // Ensure the domain is correct
-                        path: '/' 
+                        // path: '/' 
                       });
                       console.log("Cookies after setting token:", req.cookies);
-                    // if(!req.cookies.token){
-                    //     console.log("cookie is not set");
-                    // }
-                    // else{
-                    //     console.log("cookie is set");
-                    // }
-                    // console.log(req.cookies);
+                    if(!req.cookies.token){
+                        console.log("cookie is not set");
+                    }
+                    else{
+                        console.log("cookie is set");
+                    }
+                    console.log(req.cookies);
                     console.log(`the token is ${token}`);
                     req.flash("success", "LoggedIn Successfully");
                     return res.status(200).json({success: req.flash("success")});
@@ -101,20 +102,17 @@ router.post("/logout", (req, res)=>{
     return res.status(200).json({"success": req.flash("success")});
 });
 
-router.get("/check-auth", async(req, res)=>{
-        if(!req.cookies.token){
-            console.log("no token found");
-            return res.status(400).json({success: false});
-        }
-        else{
-            try{
-                console.log("cookie is", req.cookies.token);
-                let decoded= jwt.verify(req.cookies.token, "myjwtsecret");
-                let user= await User.findOne({email:decoded.email}).select("-password");
-                return res.status(200).json({success: true, user:user});
-            } catch(err){
-                return res.status(400).json({success: false});
-            }
-        }
-    })
+router.get('/user', protect, async (req, res) => {
+    try {
+      const user = await User.findById(req.user, 'email role'); // Retrieve email and role fields only
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      res.json(user);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
 module.exports = router;

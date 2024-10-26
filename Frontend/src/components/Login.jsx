@@ -12,15 +12,39 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/login', { email, password });
+      // Ensure `withCredentials` is included to send cookies
+      const response = await axios.post(
+        'http://localhost:8080/login',
+        { email, password },
+        { withCredentials: true }
+      );
+
+      // Check if response contains success flag
       if (response.data.success) {
-        localStorage.setItem('token', response.data.token);
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token);
+        }
         alert('Login successful!');
-        navigate('/booklist'); // Redirect to book list after successful login
+        navigate('/home');
+      } else {
+        alert('Login failed. Please check your credentials.');
       }
     } catch (error) {
-      console.error(error);
-      alert('Login failed! Please check your credentials.');
+      console.error('Error during login:', error);
+
+      // Additional error information
+      if (error.response) {
+        // Server responded with a status outside 2xx range
+        console.error('Server error:', error.response.data);
+        alert(`Error: ${error.response.data.failure || 'Server error occurred'}`);
+      } else if (error.request) {
+        // No response from the server
+        console.error('No response received:', error.request);
+        alert('No response from server. Check server or network connection.');
+      } else {
+        console.error('Error setting up request:', error.message);
+        alert('An unexpected error occurred.');
+      }
     }
   };
 
@@ -50,9 +74,9 @@ const Login = () => {
         </div>
         <button type="submit" className="btn btn-primary">Login</button>
       </form>
-      <p className="mt-3">
+      {/* <p className="mt-3">
         Don't have an account? <Link to="/register">Register here</Link>
-      </p>
+      </p> */}
     </div>
   );
 };

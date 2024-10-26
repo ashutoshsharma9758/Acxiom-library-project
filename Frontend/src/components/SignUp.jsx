@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "../styles/Register.css";
 const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    membership: '',
-    role: '',
+    membership: '6 months',
+    role: 'user',
   });
 
   const [error, setError] = useState('');
   const [redirectToBookList, setRedirectToBookList] = useState(false);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -24,19 +24,21 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Submitting Form Data:', formData); // Log the form data before sending it
     try {
-      const res = await axios.post('http://localhost:8080/signup', formData); // Adjust API endpoint as needed
+      const res = await axios.post('http://localhost:8080/signup', formData);
       if (res.data.success) {
-        setRedirectToBookList(true); // Trigger redirection to Book List page
+        navigate('/maintenance'); // Use navigate to redirect to the Book List page
       }
     } catch (err) {
+      console.error('Registration error:', err); // Log the error for debugging
       setError(err.response?.data?.message || 'Something went wrong');
     }
   };
 
-  if (redirectToBookList) {
-    return <Navigate to="/booklist" />; // Redirect to Book List page
-  }
+  // if (redirectToBookList) {
+  //   return <Navigate to="/booklist" />; // Redirect to Book List page
+  // }
 
   return (
     <div className="signup-container">
@@ -99,8 +101,8 @@ const Register = () => {
             onChange={handleChange}
             required
           >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
+            <option value="user">user</option>
+            <option value="admin">admin</option>
           </select>
         </div>
         <button type="submit">Register</button>
